@@ -7,8 +7,23 @@ import { StatsGrid } from "../card/StatsGrid";
 export default function HeroSection() {
   return (
     <>
-      <main className="overflow-x-hidden min-h-[calc(100vh-67px)]">
-        <section className="lg:mt-10">
+      <main className="relative overflow-x-hidden min-h-[calc(100vh-67px)] border-b border-accent">
+        <section className="lg:mt-10 pb-7 lg:pb-16">
+          {/*Grid Background */}
+          <div
+            className="absolute inset-0 -z-10 opacity-40 dark:opacity-10"
+            style={{
+              backgroundImage: `
+        linear-gradient(to right, #d1d5db 1px, transparent 1px),
+        linear-gradient(to bottom, #d1d5db 1px, transparent 1px)
+      `,
+              backgroundSize: "32px 32px",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)",
+              maskImage:
+                "radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)",
+            }}
+          />
           {/* background */}
           <div
             aria-hidden
