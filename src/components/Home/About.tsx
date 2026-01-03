@@ -3,8 +3,9 @@ import { Card, CardContent } from "@/src/components/ui/card"
 import { Button } from "@/src/components/ui/button"
 import { Badge } from "@/src/components/ui/badge"
 import { Separator } from "@/src/components/ui/separator"
-import { Heart, Shield, Users, CheckCircle, Star } from "lucide-react"
+import { CheckCircle } from "lucide-react"
 import {stats} from "@/src/data/stats"
+
 export function About() {
   const features = [
     "Background Verified Caregivers",

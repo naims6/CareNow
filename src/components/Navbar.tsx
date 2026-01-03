@@ -3,7 +3,10 @@ import Link from "next/link";
 import { Logo } from "@/src/components/logo";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
-import React from "react";
+import React, { useState } from "react";
+import { usePathname } from "next/navigation";
+import { ThemeToggle } from "./ThemeToggle";
+import { Separator } from "./ui/separator";
 
 const menuItems = [
   { name: "Home", href: "/" },
@@ -13,14 +16,15 @@ const menuItems = [
 ];
 
 export const Navbar = () => {
-  const [menuState, setMenuState] = React.useState(false);
+  const [menuState, setMenuState] = useState(false);
+  const pathname = usePathname();
   return (
-    <header>
+    <header className="fixed top-0 left-0 z-20 w-full">
       <nav
         data-state={menuState && "active"}
-        className="fixed z-20 w-full border-b border-dashed bg-white backdrop-blur md:relative dark:bg-zinc-950/50 lg:dark:bg-transparent"
+        className=" w-full border-b border-dashed bg-white/80 backdrop-blur md:relative dark:bg-zinc-950/50 lg:dark:bg-transparent"
       >
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 lg:px-3">
           <div className="flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             {/* left side */}
             <div className="flex w-full justify-between lg:w-auto">
@@ -45,18 +49,27 @@ export const Navbar = () => {
             <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
               <div className="lg:pr-4">
                 <ul className="space-y-6 text-base lg:flex lg:gap-8 lg:space-y-0 lg:text-sm">
-                  {menuItems.map((item, index) => (
-                    <li key={index}>
-                      <Link
-                        href={item.href}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150"
-                      >
-                        <span>{item.name}</span>
-                      </Link>
-                    </li>
-                  ))}
+                  {/* menu items */}
+                  {menuItems.map((item) => {
+                    const isActive = pathname === item.href;
+                    return (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className={`${
+                            isActive
+                              ? "text-primary font-bold"
+                              : "text-muted-foreground"
+                          }  hover:text-primary block duration-150`}
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
+              <ThemeToggle />
 
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit lg:border-l lg:pl-6">
                 <Button asChild variant="outline" size="sm">

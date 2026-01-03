@@ -3,7 +3,7 @@ import HeroSection from "@/src/components/Home/HeroSection";
 
 export default function Home() {
   return (
-    <div>
+    <div className="pt-16">
       <HeroSection />
       <About />
     </div>
