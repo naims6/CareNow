@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "./ThemeToggle";
+import { ThemeToggle } from "../ThemeToggle";
 
 const menuItems = [
   { name: "Home", href: "/" },
