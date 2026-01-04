@@ -1,4 +1,4 @@
-import { StatsCard } from "./stats-card"
+import { StatsCard } from "./StatsCard"
 import {stats} from "@/src/data/stats"
 
 export function StatsGrid() {

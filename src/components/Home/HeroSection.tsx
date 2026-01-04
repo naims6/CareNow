@@ -1,8 +1,46 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/src/components/ui/button";
 import Image from "next/image";
 import { StatsGrid } from "../card/StatsGrid";
+import { motion } from "framer-motion";
+import { cn } from "@/src/lib/utils";
+
+function BlurReveal({
+  children,
+  delay = 0,
+  blurAmount = 10,
+  className,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  blurAmount?: number;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={{
+        filter: `blur(${blurAmount}px)`,
+        opacity: 0,
+        y: 20,
+      }}
+      animate={{
+        filter: "blur(0px)",
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.7,
+        delay: delay,
+        ease: [0.16, 1, 0.3, 1], // Custom easing for smoother effect
+      }}
+      className={cn(className)}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function HeroSection() {
   return (
@@ -36,41 +74,55 @@ export default function HeroSection() {
           {/* hero content */}
           <div className="pt-16 lg:pt-0">
             <div className="mx-auto max-w-7xl flex flex-col justify-between items-center lg:flex-row-reverse px-6">
-              <div className="mt-8 lg:w-150">
+              <motion.div
+                className="mt-8 lg:w-150"
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
                 <Image
-                  className="ml-auto h-56 w-full object-cover sm:h-96  lg:-right-20 lg:h-max lg:w-full lg:object-contain dark:mix-blend-lighten dark:invert-0"
+                  className="ml-auto h-56 w-full object-cover sm:h-96 lg:-right-20 lg:h-max lg:w-full lg:object-contain dark:mix-blend-lighten dark:invert-0"
                   src="/family.svg"
-                  alt="Abstract Object"
+                  alt="Happy family with caregiver"
                   height="4000"
                   width="3000"
+                  priority
                 />
-              </div>
+              </motion.div>
               <div className="mx-auto mt-8  text-center lg:ml-0 lg:w-full lg:text-left">
-                <h1 className="mt-8 max-w-2xl text-balance text-5xl font-medium md:text-6xl lg:mt-16 xl:text-7xl">
-                  Trusted Care for Your Loved Ones
-                </h1>
-                <p className="mt-8 max-w-2xl text-pretty text-lg">
-                  Find reliable babysitters and elderly caregivers near you.
-                  Book safe and professional care services anytime, anywhere.
-                </p>
+                <BlurReveal blurAmount={12} delay={0.1}>
+                  <h1 className="mt-8 max-w-2xl text-balance text-5xl font-bold md:text-6xl lg:mt-16 xl:text-7xl bg-linear-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                    Trusted Care for Your Loved Ones
+                  </h1>
+                </BlurReveal>
+                <BlurReveal delay={0.3} blurAmount={8}>
+                  <p className="mt-8 max-w-2xl text-pretty text-lg text-muted-foreground">
+                    Find reliable babysitters and elderly caregivers near you.
+                    Book safe and professional care services anytime, anywhere.
+                  </p>
+                </BlurReveal>
 
                 <div className="mt-12 flex flex-col items-center justify-center gap-2 sm:flex-row lg:justify-start">
-                  <Button asChild size="lg" className="px-5 text-base">
-                    <Link href="/services" className="cursor-pointer">
-                      <span className="text-nowrap">Start Booking</span>
-                    </Link>
-                  </Button>
-                  <Button
-                    key={2}
-                    asChild
-                    size="lg"
-                    variant="secondary"
-                    className="px-5 text-base"
-                  >
-                    <Link href="#link">
-                      <span className="text-nowrap">How it&apos;s work</span>
-                    </Link>
-                  </Button>
+                  <BlurReveal delay={0.5} blurAmount={6}>
+                    <Button asChild size="lg" className="px-8 text-base gap-2">
+                      <Link href="/services" className="cursor-pointer">
+                        <span className="text-nowrap">Start Booking</span>
+                      </Link>
+                    </Button>
+                  </BlurReveal>
+
+                  <BlurReveal delay={0.7} blurAmount={6}>
+                    <Button
+                      asChild
+                      size="lg"
+                      variant="outline"
+                      className="px-8 text-base"
+                    >
+                      <Link href="#how-it-works">
+                        <span className="text-nowrap">How it works</span>
+                      </Link>
+                    </Button>
+                  </BlurReveal>
                 </div>
               </div>
             </div>

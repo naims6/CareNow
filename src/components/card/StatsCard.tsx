@@ -1,11 +1,14 @@
 import { Card, CardContent } from "@/src/components/ui/card";
 import { LucideIcon } from "lucide-react";
+import { Counter } from "../ui/Counter";
 
 interface StatsCardProps {
-  icon: LucideIcon;
-  value: string;
+  icon: React.ComponentType<{ className?: string }>;
+  value: number;
   label: string;
   description?: string;
+  prefix?: string;
+  suffix?: string;
 }
 
 export function StatsCard({
@@ -13,6 +16,7 @@ export function StatsCard({
   value,
   label,
   description,
+  suffix,
 }: StatsCardProps) {
   return (
     <Card className="shadow-md hover:shadow-lg transition-shadow border border-accent/10 bg-card/20">
@@ -22,7 +26,10 @@ export function StatsCard({
             <Icon className="h-8 w-8 text-primary" />
           </div>
           <div>
-            <h3 className="text-3xl font-bold text-foreground">{value}</h3>
+            <h3 className="text-3xl font-bold text-foreground">
+              <Counter value={Number(value)} suffix={suffix}></Counter>
+            </h3>
+
             <p className="text-lg font-semibold text-foreground">{label}</p>
             {description && (
               <p className="text-sm text-muted-foreground mt-1">
