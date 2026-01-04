@@ -48,7 +48,7 @@ export function ServiceCard({ service }: { service: ServiceCardProps }) {
         },
       }}
       transition={{
-        duration: 0.7,
+        duration: 0.6,
         delay: service.delay,
         type: "spring",
         stiffness: 80,
@@ -65,8 +65,8 @@ export function ServiceCard({ service }: { service: ServiceCardProps }) {
       }}
       className="h-full"
     >
-      <Card className="group hover:shadow-2xl transition-all duration-300 border hover:border-primary/30 relative overflow-hidden h-full">
-        {/* Animated Background Gradient on Hover */}
+      <Card className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 relative overflow-hidden h-full">
+        {/* Animated Background  */}
         <div className="absolute inset-0 bg-linear-to-br from-transparent via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
         {/* Shine Effect on Hover */}
@@ -80,8 +80,8 @@ export function ServiceCard({ service }: { service: ServiceCardProps }) {
                 isInView ? { rotate: 0, scale: 1 } : { rotate: -15, scale: 0.8 }
               }
               transition={{ delay: service.delay + 0.2, type: "spring" }}
-              whileHover={{ rotate: 360, scale: 1.1 }}
-              className={`p-3 rounded-lg ${service.color} transition-all duration-300 group-hover:scale-110`}
+              whileHover={{ scale: 1.05 }}
+              className={`p-3 rounded-lg ${service.color} transition-all duration-300 group-hover:scale-105`}
             >
               <Icon className={`h-8 w-8 ${service.iconColor}`} />
             </motion.div>
@@ -125,7 +125,7 @@ export function ServiceCard({ service }: { service: ServiceCardProps }) {
         </CardHeader>
 
         <CardContent className="relative z-10">
-          {/* Features List with Stagger Animation */}
+          {/* Features List with  */}
           <motion.ul
             className="space-y-3 mb-6"
             variants={{

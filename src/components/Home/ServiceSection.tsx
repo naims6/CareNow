@@ -56,9 +56,9 @@ export function ServicesSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 border-b border-accent">
+    <section className="py-16 md:py-20 border-b border-accent">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header with Animation */}
+        {/* Service Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export function ServicesSection() {
           </p>
         </motion.div>
 
-        {/* Services Grid with Stagger Animation */}
+        {/* Services Grid */}
         <motion.div 
           className="grid md:grid-cols-3 gap-6"
           initial="hidden"
@@ -103,7 +103,7 @@ export function ServicesSection() {
           })}
         </motion.div>
 
-        {/* Additional Info with Animation */}
+        {/* Trust Card */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

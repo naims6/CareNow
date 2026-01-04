@@ -36,7 +36,7 @@ export default function Testimonial() {
 
   return (
     <section>
-      <div className="py-16 md:py-32">
+      <div className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center max-w-3xl mx-auto">
             <Badge variant="outline" className="mb-4">
