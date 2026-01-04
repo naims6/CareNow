@@ -1,5 +1,4 @@
 import { Card, CardContent } from "@/src/components/ui/card";
-import { LucideIcon } from "lucide-react";
 import { Counter } from "../ui/Counter";
 
 interface StatsCardProps {
