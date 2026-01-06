@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/src/components/ui/button";
 import Image from "next/image";
-import { StatsGrid } from "../card/StatsGrid";
+import { StatsGrid } from "../../card/StatsGrid";
 import { motion } from "framer-motion";
 import { cn } from "@/src/lib/utils";
 

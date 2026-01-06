@@ -1,19 +1,13 @@
-"use client"
+"use client";
 
 import { Badge } from "@/src/components/ui/badge";
-import {
-  Clock,
-  Shield,
-  Star,
-
-} from "lucide-react";
+import { Clock, Shield, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { services } from "@/src/data/services";
-import { ServiceCard } from "../card/ServiceCard";
-import { TrustCard } from "../card/TrustCard";
+import { ServiceCard } from "../../card/ServiceCard";
+import { TrustCard } from "../../card/TrustCard";
 
 export function ServicesSection() {
-
   return (
     <section className="py-16 md:py-20 border-b border-accent">
       <div className="max-w-7xl mx-auto px-4">
@@ -39,7 +33,7 @@ export function ServicesSection() {
         </motion.div>
 
         {/* Services Grid */}
-        <motion.div 
+        <motion.div
           className="grid md:grid-cols-3 gap-6"
           initial="hidden"
           whileInView="visible"
@@ -50,20 +44,18 @@ export function ServicesSection() {
               opacity: 1,
               transition: {
                 staggerChildren: 0.15,
-                delayChildren: 0.1
-              }
-            }
+                delayChildren: 0.1,
+              },
+            },
           }}
         >
           {services.map((service, index) => {
-            return (
-              <ServiceCard key={index} service={service} />
-            );
+            return <ServiceCard key={index} service={service} />;
           })}
         </motion.div>
 
         {/* Trust Card */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -75,12 +67,12 @@ export function ServicesSection() {
             title="Verified Caregivers"
             description="All caregivers undergo strict background checks and training"
           />
-          <TrustCard 
+          <TrustCard
             icon={Clock}
             title="Flexible Scheduling"
             description="Book for hours, days, or weeks with easy rescheduling"
           />
-          <TrustCard 
+          <TrustCard
             icon={Star}
             title="98% Satisfaction"
             description="Rated excellent by families across Bangladesh"
@@ -90,4 +82,3 @@ export function ServicesSection() {
     </section>
   );
 }
-

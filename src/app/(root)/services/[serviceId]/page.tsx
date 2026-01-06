@@ -201,12 +201,12 @@ export default async function ServiceDetailPage({
       {/* Hero Section */}
       <section className="pt-24 pb-16 md:pt-32 md:pb-20 relative overflow-hidden">
         <div
-          className={`absolute inset-0 bg-linear-to-br ${service.color
+          className={`hidden lg:block absolute inset-0 bg-linear-to-br ${service.color
             .replace("from-", "from-")
             .replace("to-", "to-")}/5 via-transparent to-transparent`}
         />
         <div className="relative">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto px-4">
             {/* Back Button */}
             <Button variant="ghost" className="mb-8" asChild>
               <Link href="/services">
@@ -254,7 +254,7 @@ export default async function ServiceDetailPage({
 
       {/* Main Content */}
       <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Left Column - Content */}
             <div className="lg:col-span-2 space-y-8">
@@ -315,7 +315,7 @@ export default async function ServiceDetailPage({
             {/* Right Column - Pricing & CTA */}
             <div className="space-y-6">
               {/* Pricing Card */}
-              <Card className="sticky top-24">
+              <Card>
                 <CardHeader>
                   <CardTitle>Pricing Plans</CardTitle>
                   <CardDescription>
