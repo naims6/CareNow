@@ -22,7 +22,7 @@ export const Navbar = () => {
     <header className="fixed top-0 left-0 z-20 w-full">
       <nav
         data-state={menuState && "active"}
-        className=" w-full border-b border-dashed bg-white/80 backdrop-blur md:relative dark:bg-zinc-950/50 lg:dark:bg-transparent"
+        className=" w-full border-b border-dashed bg-white/50 backdrop-blur md:relative dark:bg-zinc-950/50 lg:dark:bg-transparent"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-3">
           <div className="flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
@@ -78,12 +78,12 @@ export const Navbar = () => {
                 <ThemeToggle />
               </div>
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit lg:border-l lg:pl-6">
-                <Button asChild variant="outline" size="sm">
+                <Button asChild variant="outline" size="default">
                   <Link href="/login">
                     <span>Login</span>
                   </Link>
                 </Button>
-                <Button asChild size="sm">
+                <Button asChild size="default">
                   <Link href="/sign-up">
                     <span>Sign Up</span>
                   </Link>

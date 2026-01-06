@@ -17,22 +17,12 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/src/components/ui/tabs";
-import {
-  Baby,
-  User,
-  HeartPulse,
-  Check,
-  Clock,
-  Shield,
-  Users,
-  Phone,
-  MapPin,
-  ArrowRight,
-} from "lucide-react";
+import { Baby, User, HeartPulse, Check, Users, ArrowRight } from "lucide-react";
 import { servicesCardsData as serviceCardsData } from "@/src/data/services";
 import Link from "next/link";
 import { ServiceCard } from "@/src/components/card/ServiceCard";
 import { services } from "@/src/data/services";
+import { motion } from "framer-motion";
 
 // export const metadata: Metadata = {
 //   title: "Our Care Services | Baby Care, Elderly Care & Special Care",
@@ -62,7 +52,12 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-linear-to-b from-background to-muted/20">
       {/* Hero Section */}
-      <section className="pt-24 pb-10 md:pt-32 md:pb-20 relative overflow-hidden">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="pt-24 pb-10 md:pt-32 md:pb-20 relative overflow-hidden"
+      >
         <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent" />
         <div className="mx-auto max-w-7xl relative px-6">
           <div className="max-w-3xl mx-auto text-center">
@@ -87,13 +82,19 @@ export default function ServicesPage() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Services Tabs */}
       <section id="services" className="py-16 md:pt-14 pb-16">
         <div className="mx-auto max-w-7xl px-6">
           <Tabs defaultValue="baby-care" className="w-full">
-            <div className="flex justify-center mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex justify-center mb-12"
+            >
               <TabsList className="grid w-full max-w-2xl grid-cols-3">
                 <TabsTrigger
                   value="baby-care"
@@ -117,9 +118,9 @@ export default function ServicesPage() {
                   Special Care
                 </TabsTrigger>
               </TabsList>
-            </div>
+            </motion.div>
 
-            {services.map((service) => {
+            {services.map((service, tabIndex) => {
               const Icon = service.icon;
               return (
                 <TabsContent
@@ -127,17 +128,26 @@ export default function ServicesPage() {
                   value={service.id}
                   className="space-y-8"
                 >
-                  {/* Service Header */}
-                  <div className="grid lg:grid-cols-2 gap-8 items-start">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: tabIndex * 0.1 }}
+                    className="grid lg:grid-cols-2 gap-8 items-start"
+                  >
+                    {/* Service Header */}
                     <div>
                       <div className="flex items-center gap-4 mb-6">
-                        <div
+                        <motion.div
+                          initial={{ scale: 0.8 }}
+                          whileInView={{ scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4 }}
                           className={`p-4 rounded-xl ${service.color
                             .replace("bg-", "bg-linear-to-br from-")
                             .replace("/20", "/40")} shadow-lg`}
                         >
                           <Icon className="h-8 w-8 text-white" />
-                        </div>
+                        </motion.div>
                         <div>
                           <h2 className="text-3xl md:text-4xl font-bold">
                             {service.title}
@@ -159,8 +169,15 @@ export default function ServicesPage() {
                             {service.highlights.map((highlight, idx) => {
                               const HighlightIcon = highlight.icon;
                               return (
-                                <div
+                                <motion.div
                                   key={idx}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  whileInView={{ opacity: 1, x: 0 }}
+                                  viewport={{ once: true }}
+                                  transition={{
+                                    duration: 0.4,
+                                    delay: idx * 0.1,
+                                  }}
                                   className="flex items-center gap-2"
                                 >
                                   <HighlightIcon
@@ -169,7 +186,7 @@ export default function ServicesPage() {
                                   <span className="text-sm">
                                     {highlight.text}
                                   </span>
-                                </div>
+                                </motion.div>
                               );
                             })}
                           </div>
@@ -178,53 +195,80 @@ export default function ServicesPage() {
                     </div>
 
                     {/* Pricing Card */}
-                    <Card className="border-primary/20 shadow-lg">
-                      <CardHeader>
-                        <CardTitle className="text-2xl">
-                          Pricing & Details
-                        </CardTitle>
-                        <CardDescription>
-                          Flexible plans for your needs
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-6">
-                        <div>
-                          <div className="text-3xl font-bold text-primary">
-                            {service.price}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      whileHover={{ y: -5 }}
+                    >
+                      <Card className="border-primary/20 shadow-lg">
+                        <CardHeader>
+                          <CardTitle className="text-2xl">
+                            Pricing & Details
+                          </CardTitle>
+                          <CardDescription>
+                            Flexible plans for your needs
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                          <div>
+                            <div className="text-3xl font-bold text-primary">
+                              {service.price}
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                              Custom packages available for long-term care
+                            </p>
                           </div>
-                          <p className="text-sm text-muted-foreground">
-                            Custom packages available for long-term care
-                          </p>
-                        </div>
 
-                        <div className="space-y-3">
-                          <div className="flex items-center gap-2">
-                            <Check className="h-4 w-4 text-green-600" />
-                            <span>Minimum 4 hours booking</span>
+                          <div className="space-y-3">
+                            {[
+                              "Minimum 4 hours booking",
+                              "Free consultation included",
+                              "Insurance coverage up to ৳5 lakh",
+                            ].map((item, idx) => (
+                              <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, x: -10 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{
+                                  duration: 0.3,
+                                  delay: 0.3 + idx * 0.1,
+                                }}
+                                className="flex items-center gap-2"
+                              >
+                                <Check className="h-4 w-4 text-green-600" />
+                                <span>{item}</span>
+                              </motion.div>
+                            ))}
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Check className="h-4 w-4 text-green-600" />
-                            <span>Free consultation included</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Check className="h-4 w-4 text-green-600" />
-                            <span>Insurance coverage up to ৳5 lakh</span>
-                          </div>
-                        </div>
-                      </CardContent>
-                      <CardFooter>
-                        <Button className="w-full" size="lg" asChild>
-                          <Link href={`/book?service=${service.id}`}>
-                            Book {service.title}
-                            <ArrowRight className="ml-2 h-4 w-4" />
-                          </Link>
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  </div>
+                        </CardContent>
+                        <CardFooter>
+                          <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <Button className="w-full" size="lg" asChild>
+                              <Link href={`/book?service=${service.id}`}>
+                                Book {service.title}
+                                <ArrowRight className="ml-2 h-4 w-4" />
+                              </Link>
+                            </Button>
+                          </motion.div>
+                        </CardFooter>
+                      </Card>
+                    </motion.div>
+                  </motion.div>
 
                   {/* Features & Ideal For */}
-                  <div className="grid md:grid-cols-2 gap-8">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="grid md:grid-cols-2 gap-8"
+                  >
                     <Card>
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
@@ -235,10 +279,17 @@ export default function ServicesPage() {
                       <CardContent>
                         <ul className="space-y-3">
                           {service.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-start gap-3">
+                            <motion.li
+                              key={idx}
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 0.3, delay: idx * 0.05 }}
+                              className="flex items-start gap-3"
+                            >
                               <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
                               <span>{feature}</span>
-                            </li>
+                            </motion.li>
                           ))}
                         </ul>
                       </CardContent>
@@ -254,15 +305,22 @@ export default function ServicesPage() {
                       <CardContent>
                         <ul className="space-y-3">
                           {service.idealFor.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-3">
+                            <motion.li
+                              key={idx}
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 0.3, delay: idx * 0.05 }}
+                              className="flex items-start gap-3"
+                            >
                               <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
                               <span>{item}</span>
-                            </li>
+                            </motion.li>
                           ))}
                         </ul>
                       </CardContent>
                     </Card>
-                  </div>
+                  </motion.div>
                 </TabsContent>
               );
             })}
@@ -273,16 +331,28 @@ export default function ServicesPage() {
       <Separator className="my-8" />
 
       {/* All Services Grid using ServiceCard component */}
-      <section className="py-16 md:py-24">
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="py-16 md:py-24"
+      >
         <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center max-w-3xl mx-auto mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-3xl mx-auto mb-12"
+          >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Compare All Services
             </h2>
             <p className="text-lg text-muted-foreground">
               Find the perfect care service for your specific needs
             </p>
-          </div>
+          </motion.div>
 
           {/* Use ServiceCard component here */}
           <div className="grid md:grid-cols-3 gap-6">
@@ -291,32 +361,60 @@ export default function ServicesPage() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* FAQ Section */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="py-16 md:py-24 bg-muted/30"
+      >
         <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center max-w-3xl mx-auto mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-3xl mx-auto mb-12"
+          >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Common Questions
             </h2>
             <p className="text-lg text-muted-foreground">
               Everything you need to know about our services
             </p>
-          </div>
+          </motion.div>
 
-          <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl mx-auto"
+          >
             {faqs.map((faq, index) => (
-              <Card key={index} className="mb-4">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-3">{faq.question}</h3>
-                  <p className="text-muted-foreground">{faq.answer}</p>
-                </CardContent>
-              </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <Card className="mb-4 hover:shadow-md transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-semibold mb-3">
+                      {faq.question}
+                    </h3>
+                    <p className="text-muted-foreground">{faq.answer}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
