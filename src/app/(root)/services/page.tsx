@@ -23,6 +23,7 @@ import { services } from "@/src/data/services";
 import { motion } from "framer-motion";
 import ServiceCardGrid from "@/src/components/Pages/Services/ServiceCardGrid";
 import ServiceHeroSection from "@/src/components/Pages/Services/ServiceHeroSection";
+import { FAQ } from "@/src/components/Pages/Home/Faq";
 
 // export const metadata: Metadata = {
 //   title: "Our Care Services | Baby Care, Elderly Care & Special Care",
@@ -31,31 +32,13 @@ import ServiceHeroSection from "@/src/components/Pages/Services/ServiceHeroSecti
 // };
 
 export default function ServicesPage() {
-  const faqs = [
-    {
-      question: "How quickly can I get a caregiver?",
-      answer:
-        "For standard bookings: Within 24 hours. For emergency/same-day service: Within 2-4 hours in metro areas. We have caregivers available 24/7 for urgent needs.",
-    },
-    {
-      question: "What's included in the hourly rate?",
-      answer:
-        "Caregiver's time, background-verified service, insurance coverage, 24/7 support access, regular check-ins, and emergency response. Additional medical supplies or transportation may have extra charges.",
-    },
-    {
-      question: "Can I meet the caregiver before booking?",
-      answer:
-        "Yes! We offer free 30-minute video consultations with potential caregivers. You can view profiles, certifications, and reviews before making a decision.",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-linear-to-b from-background to-muted/20">
       {/* Hero Section */}
       <ServiceHeroSection />
 
       {/* Services Tabs */}
-      <section id="services" className="py-16 md:pt-14 pb-16">
+      <section id="services" className="py-16 md:pt-10 pb-16">
         <div className="mx-auto max-w-7xl px-6">
           <Tabs defaultValue="baby-care" className="w-full">
             <motion.div
@@ -329,57 +312,7 @@ export default function ServicesPage() {
       </motion.section>
 
       {/* FAQ Section */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="py-16 md:py-24 bg-muted/30"
-      >
-        <div className="mx-auto max-w-7xl px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-3xl mx-auto mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Common Questions
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Everything you need to know about our services
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto"
-          >
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <Card className="mb-4 hover:shadow-md transition-shadow duration-300">
-                  <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold mb-3">
-                      {faq.question}
-                    </h3>
-                    <p className="text-muted-foreground">{faq.answer}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
+      <FAQ />
     </div>
   );
 }
