@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "../components/Shared/Navbar";
 import { ThemeProvider } from "../components/ThemeProvider";
-import FooterSection from "../components/Shared/Footer";
 import ScrollProgress from "../components/ScrollProgress";
 
 const geistSans = Geist({
@@ -116,10 +114,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
             {children}
             <ScrollProgress />
-            <FooterSection />
           </ThemeProvider>
         </div>
       </body>
