@@ -2,58 +2,17 @@
 
 import { Badge } from "@/src/components/ui/badge";
 import {
-  Baby,
-  User,
-  HeartPulse,
   Clock,
   Shield,
   Star,
 
 } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { services } from "@/src/data/services";
 import { ServiceCard } from "../card/ServiceCard";
 import { TrustCard } from "../card/TrustCard";
 
 export function ServicesSection() {
-  const services = [
-    {
-      icon: Baby,
-      title: "Baby Care",
-      description:
-        "Professional babysitting services with certified caregivers for newborns, infants, and toddlers.",
-      features: ["Newborn Care", "Overnight Sitting", "Emergency Care"],
-      price: "Starting from ৳300/hour",
-      badge: "Most Popular",
-      color: "bg-pink-50 dark:bg-pink-950/20",
-      iconColor: "text-pink-600",
-      delay: 0.1
-    },
-    {
-      icon: User,
-      title: "Elderly Care",
-      description:
-        "Compassionate care for senior citizens including companionship, medication management, and daily assistance.",
-      features: ["24/7 Companion", "Medication Help", "Mobility Support"],
-      price: "Starting from ৳350/hour",
-      badge: "24/7 Available",
-      color: "bg-blue-50 dark:bg-blue-950/20",
-      iconColor: "text-blue-600",
-      delay: 0.2
-    },
-    {
-      icon: HeartPulse,
-      title: "Special Care",
-      description:
-        "Specialized care for post-surgery patients, chronic conditions, and individuals with special needs.",
-      features: ["Post-Surgery Care", "Chronic Conditions", "Special Needs"],
-      price: "Starting from ৳400/hour",
-      badge: "Medical Trained",
-      color: "bg-green-50 dark:bg-green-950/20",
-      iconColor: "text-green-600",
-      delay: 0.3
-    },
-  ];
 
   return (
     <section className="py-16 md:py-20 border-b border-accent">
