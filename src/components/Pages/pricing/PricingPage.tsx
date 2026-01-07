@@ -207,7 +207,7 @@ export function PricingPage() {
                       <ul className="space-y-3 mb-6">
                         {plan.features.map((feature, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <CheckCircle className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
                             <span className="text-sm">{feature}</span>
                           </li>
                         ))}

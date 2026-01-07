@@ -11,8 +11,10 @@ import { ThemeToggle } from "../ThemeToggle";
 const menuItems = [
   { name: "Home", href: "/" },
   { name: "Service", href: "/services" },
+  { name: "Caregivers", href: "/caregivers" },
   { name: "About", href: "/about" },
   { name: "Pricing", href: "/pricing" },
+  { name: "How It Works", href: "/how-it-works" },
 ];
 
 export const Navbar = () => {
