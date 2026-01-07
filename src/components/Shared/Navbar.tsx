@@ -12,7 +12,7 @@ const menuItems = [
   { name: "Home", href: "/" },
   { name: "Service", href: "/services" },
   { name: "About", href: "/about" },
-  { name: "Pricing", href: "#link" },
+  { name: "Pricing", href: "/pricing" },
 ];
 
 export const Navbar = () => {

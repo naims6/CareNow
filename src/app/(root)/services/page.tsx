@@ -203,7 +203,7 @@ export default function ServicesPage() {
                             transition={{ duration: 0.2 }}
                           >
                             <Button className="w-full" size="lg" asChild>
-                              <Link href={`/book?service=${service.id}`}>
+                              <Link href={`/services/${service.id}`}>
                                 Book {service.title}
                                 <ArrowRight className="ml-2 h-4 w-4" />
                               </Link>
