@@ -7,8 +7,8 @@ import {
 } from "@/src/components/ui/avatar";
 import { Card, CardContent } from "@/src/components/ui/card";
 import { TestimonialType, testimonials } from "@/src/data/reviews";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
+import { Badge } from "../../ui/badge";
+import { Button } from "../../ui/button";
 import { useState } from "react";
 
 const chunkArray = (

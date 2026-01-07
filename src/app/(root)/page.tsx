@@ -1,12 +1,12 @@
-import { About } from "@/src/components/Home/About";
-import { ServicesSection } from "@/src/components/Home/ServiceSection";
-import HeroSection from "@/src/components/Home/HeroSection";
-import Testimonial from "@/src/components/Home/Testimonial";
-import { HowItWorks } from "@/src/components/Home/HowItWorks";
-import { EmergencyCare } from "@/src/components/Home/EmergencyCare";
-import { FAQ } from "@/src/components/Home/Faq";
-import { CaregiverPreview } from "@/src/components/Home/CareGiversProfile";
-import { BlogPreview } from "@/src/components/Home/BlogPreview";
+import { About } from "@/src/components/Pages/Home/About";
+import { ServicesSection } from "@/src/components/Pages/Home/ServiceSection";
+import HeroSection from "@/src/components/Pages/Home/HeroSection";
+import Testimonial from "@/src/components/Pages/Home/Testimonial";
+import { HowItWorks } from "@/src/components/Pages/Home/HowItWorks";
+import { EmergencyCare } from "@/src/components/Pages/Home/EmergencyCare";
+import { FAQ } from "@/src/components/Pages/Home/Faq";
+import { CaregiverPreview } from "@/src/components/Pages/Home/CareGiversProfile";
+import { BlogPreview } from "@/src/components/Pages/Home/BlogPreview";
 
 export default function Home() {
   return (

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { Card, CardContent } from "@/src/components/ui/card"
-import { Button } from "@/src/components/ui/button"
-import { Phone, Clock, Shield, Ambulance } from "lucide-react"
-import { motion } from "framer-motion"
-import { Badge } from "../ui/badge"
+import { Card, CardContent } from "@/src/components/ui/card";
+import { Button } from "@/src/components/ui/button";
+import { Phone, Clock, Shield, Ambulance } from "lucide-react";
+import { motion } from "framer-motion";
+import { Badge } from "../../ui/badge";
 
 export function EmergencyCare() {
   return (
@@ -24,7 +24,8 @@ export function EmergencyCare() {
               Need Care Urgently?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Our emergency care service connects you with available caregivers within 60 minutes. Available 24/7 for urgent care situations.
+              Our emergency care service connects you with available caregivers
+              within 60 minutes. Available 24/7 for urgent care situations.
             </p>
 
             <div className="space-y-4 mb-8">
@@ -47,9 +48,7 @@ export function EmergencyCare() {
                 <Phone className="h-4 w-4" />
                 Call Emergency: 09678-CARE-NOW
               </Button>
-              <Button variant="outline">
-                Book Emergency Care
-              </Button>
+              <Button variant="outline">Book Emergency Care</Button>
             </div>
           </motion.div>
 
@@ -66,14 +65,21 @@ export function EmergencyCare() {
                   <div className="w-20 h-20 rounded-full bg-red-900 flex items-center justify-center mx-auto mb-6">
                     <Phone className="h-10 w-10 text-white dark:text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4">24/7 Emergency Support</h3>
+                  <h3 className="text-2xl font-bold mb-4">
+                    24/7 Emergency Support
+                  </h3>
                   <p className="text-muted-foreground mb-6">
-                    Our emergency team is always available for urgent care needs, medical emergencies, or last-minute cancellations.
+                    Our emergency team is always available for urgent care
+                    needs, medical emergencies, or last-minute cancellations.
                   </p>
                   <div className="space-y-3">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-destructive">60 min</div>
-                      <div className="text-sm text-muted-foreground">Max Response Time</div>
+                      <div className="text-3xl font-bold text-destructive">
+                        60 min
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        Max Response Time
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -83,5 +89,5 @@ export function EmergencyCare() {
         </div>
       </div>
     </section>
-  )
+  );
 }

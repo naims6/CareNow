@@ -1,11 +1,10 @@
-// components/sections/caregiver-preview.tsx
 "use client"
 
 import { Card, CardContent } from "@/src/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 import { Badge } from "@/src/components/ui/badge"
 import { Button } from "@/src/components/ui/button"
-import { Star, Award, Shield, Calendar, Heart } from "lucide-react"
+import { Star } from "lucide-react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 
