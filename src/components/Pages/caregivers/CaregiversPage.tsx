@@ -336,8 +336,8 @@ export function CaregiversPage() {
   return (
     <div className="min-h-screen bg-linear-to-b from-background to-muted/20 mt-16">
       {/* Hero Section */}
-      <section className="py-12 md:py-16 bg-linear-to-r from-primary/10 via-primary/5 to-secondary/10">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="py-16 md:py-20 bg-linear-to-r from-primary/10 via-primary/5 to-secondary/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
               Find Your Perfect Caregiver
@@ -352,7 +352,7 @@ export function CaregiversPage() {
 
       {/* Search */}
       <section className="py-8 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-4">
             {/* Search Bar */}
             <div className="relative">
@@ -370,7 +370,7 @@ export function CaregiversPage() {
 
       {/* Caregivers Grid */}
       <section className="py-8">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {caregiversData.length === 0 ? (
             <div className="text-center py-16">
               <Users className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
@@ -382,7 +382,7 @@ export function CaregiversPage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               <CaregiverCard caregiversData={caregiversData} />
             </div>
           )}

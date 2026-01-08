@@ -28,9 +28,9 @@ export function HowItWorksPage() {
   return (
     <div className="min-h-screen mt-8">
       {/* Hero Section */}
-      <section className="relative py-14 md:py-20 lg:py-24 overflow-hidden">
+      <section className="relative py-14 md:py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-background to-secondary/5" />
-        <div className="relative max-w-7xl mx-auto px-4">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <Badge
               variant="outline"
@@ -54,9 +54,9 @@ export function HowItWorksPage() {
       </section>
 
       {/* 4-Step Process */}
-      <section className="py-16 md:py-14">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+      <section className="py-6 md:py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Get Started in 4 Easy Steps
             </h2>
@@ -69,7 +69,7 @@ export function HowItWorksPage() {
             {/* Connection Line */}
             <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-linear-to-r from-primary/20 via-primary/40 to-primary/20 -z-10" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
               {steps.map((step, index) => (
                 <motion.div
                   key={step.number}
@@ -135,9 +135,9 @@ export function HowItWorksPage() {
       </section>
 
       {/* Verification Process */}
-      <section className="py-16 md:py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="py-16 md:py-20 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -243,9 +243,9 @@ export function HowItWorksPage() {
       </section>
 
       {/* Booking Process Details */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+      <section className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Detailed Booking Process
             </h2>
@@ -254,7 +254,7 @@ export function HowItWorksPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {bookingDetails.map((detail, index) => (
               <motion.div
                 key={index}
@@ -299,9 +299,9 @@ export function HowItWorksPage() {
       </section>
 
       {/* Support Section */}
-      <section className="py-16 md:py-24 bg-linear-to-r from-primary/10 via-primary/5 to-secondary/10">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="py-16 md:py-20 bg-linear-to-r from-primary/10 via-primary/5 to-secondary/10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}

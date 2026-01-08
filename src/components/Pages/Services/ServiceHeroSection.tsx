@@ -10,7 +10,7 @@ const ServiceHeroSection = () => {
         className="pt-24 pb-8 md:pt-32 md:pb-5 relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent" />
-        <div className="mx-auto max-w-7xl relative px-6">
+        <div className="mx-auto max-w-7xl relative px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <Badge variant="outline" className="mb-6">
               Our Services
