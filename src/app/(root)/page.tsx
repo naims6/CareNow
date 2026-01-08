@@ -6,7 +6,6 @@ import { HowItWorks } from "@/src/components/Pages/Home/HowItWorks";
 import { EmergencyCare } from "@/src/components/Pages/Home/EmergencyCare";
 import { FAQ } from "@/src/components/Pages/Home/Faq";
 import { CaregiverPreview } from "@/src/components/Pages/Home/CareGiversProfile";
-import { BlogPreview } from "@/src/components/Pages/Home/BlogPreview";
 
 export default function Home() {
   return (
@@ -19,7 +18,6 @@ export default function Home() {
       <Testimonial />
       <EmergencyCare />
       <FAQ />
-      <BlogPreview />
     </div>
   );
 }

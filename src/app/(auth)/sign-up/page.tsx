@@ -76,7 +76,13 @@ export default function LoginPage() {
 
             <div className="space-y-2">
               <Label htmlFor="email" className="block text-sm">
-                Username
+                NID
+              </Label>
+              <Input type="number" required name="nid" id="nid" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email" className="block text-sm">
+                Email
               </Label>
               <Input type="email" required name="email" id="email" />
             </div>
