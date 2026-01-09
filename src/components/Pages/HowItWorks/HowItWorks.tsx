@@ -2,7 +2,6 @@
 
 import { Card, CardContent } from "@/src/components/ui/card";
 import { Badge } from "@/src/components/ui/badge";
-import { Button } from "@/src/components/ui/button";
 import {
   Search,
   UserCheck,
@@ -10,19 +9,14 @@ import {
   Shield,
   CheckCircle,
   Clock,
-  Phone,
-  Mail,
-  ArrowRight,
   Users,
   Star,
   FileCheck,
-  HeartHandshake,
   Award,
   Zap,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/src/lib/utils";
-import Link from "next/link";
 
 export function HowItWorksPage() {
   return (
@@ -297,115 +291,6 @@ export function HowItWorksPage() {
           </div>
         </div>
       </section>
-
-      {/* Support Section */}
-      <section className="py-16 md:py-20 bg-linear-to-r from-primary/10 via-primary/5 to-secondary/10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Support Throughout Your{" "}
-                <span className="text-primary">Care Journey</span>
-              </h2>
-
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Our dedicated support team is available 24/7 to assist you at
-                every stage of your care journey, from initial booking to
-                ongoing support.
-              </p>
-
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-background border">
-                  <Phone className="h-6 w-6 text-blue-500" />
-                  <div>
-                    <h3 className="font-bold text-lg">
-                      24/7 Emergency Support
-                    </h3>
-                    <p className="text-muted-foreground">
-                      Immediate assistance for urgent needs
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-background border">
-                  <Users className="h-6 w-6 text-green-500" />
-                  <div>
-                    <h3 className="font-bold text-lg">
-                      Dedicated Care Manager
-                    </h3>
-                    <p className="text-muted-foreground">
-                      Personalized support for your family
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-background border">
-                  <HeartHandshake className="h-6 w-6 text-purple-500" />
-                  <div>
-                    <h3 className="font-bold text-lg">
-                      Feedback & Improvement
-                    </h3>
-                    <p className="text-muted-foreground">
-                      Continuous service enhancement
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <Card className="border-primary/20">
-                <CardContent className="p-8">
-                  <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-primary/10 mb-4">
-                      <Star className="h-8 w-8 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-2">
-                      Ready to Get Started?
-                    </h3>
-                    <p className="text-muted-foreground">
-                      Begin your care journey today
-                    </p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <Button asChild className="w-full" size="lg">
-                      <Link href="/caregivers">
-                        Browse Caregivers
-                        <ArrowRight className="h-4 w-4 ml-2" />
-                      </Link>
-                    </Button>
-
-                    <Button asChild variant="outline" className="w-full">
-                      <Link href="/contact">
-                        Contact Support
-                        <Mail className="h-4 w-4 ml-2" />
-                      </Link>
-                    </Button>
-
-                    <div className="pt-6 border-t">
-                      <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="h-4 w-4" />
-                        <span>Average response time: 15 minutes</span>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
@@ -499,7 +384,7 @@ const qualityMetrics = [
     iconBg: "bg-blue-100 text-blue-600",
   },
   {
-    label: "Average Rating",
+    label: "Average  ",
     value: "4.8/5",
     icon: Star,
     iconBg: "bg-yellow-100 text-yellow-600",

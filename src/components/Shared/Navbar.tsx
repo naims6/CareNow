@@ -30,10 +30,7 @@ export const Navbar = () => {
             {/* Logo */}
             <div className="flex items-center">
               <Link href="/" className="flex items-center space-x-2">
-                <Logo />
-                <span className="hidden font-bold text-lg sm:inline-block">
-                  CareNow
-                </span>
+                <Logo />              
               </Link>
             </div>
 
