@@ -2,13 +2,17 @@
 
 import Link from "next/link";
 import { Logo } from "@/src/components/logo";
-import { Menu, X, User, Home, Heart, Users, DollarSign, HelpCircle, Info } from "lucide-react";
+import { Menu, X, User, Home, Heart, Users, DollarSign, HelpCircle, Info, LogOut, LayoutDashboard } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
-import React, { useState } from "react";
-import { usePathname } from "next/navigation";
+import React, { useState, useRef, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { ThemeToggle } from "../ThemeToggle";
 import { cn } from "@/src/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { logoutUser } from "@/src/actions/server/auth";
+
 const menuItems = [
   { name: "Home", href: "/", icon: Home },
   { name: "Services", href: "/services", icon: Heart },
@@ -19,8 +23,29 @@ const menuItems = [
 ];
 
 export const Navbar = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const pathname = usePathname();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsUserDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLogout = async () => {
+    await logoutUser();
+    setIsUserDropdownOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full">
@@ -58,19 +83,205 @@ export const Navbar = () => {
 
               <div className="ml-6 flex items-center space-x-4">
                 <ThemeToggle />
-                <div className="h-6 w-px bg-border" />
-                <Button asChild variant="outline" size="sm">
-                  <Link href="/login">Login</Link>
-                </Button>
-                <Button asChild size="sm">
-                  <Link href="/sign-up">Sign Up</Link>
-                </Button>
+                
+                {session?.user ? (
+                  // User dropdown for logged in users
+                  <div className="relative" ref={dropdownRef}>
+                    <button
+                      onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+                      className="flex items-center gap-2 rounded-full p-1 hover:bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      aria-label="User menu"
+                    >
+                      <div className="relative h-8 w-8 overflow-hidden rounded-full border-2 border-primary/20">
+                        {session.user.image ? (
+                          <Image
+                            src={session.user.image}
+                            alt={session.user.name || "User"}
+                            fill
+                            className="object-cover"
+                            sizes="32px"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center bg-primary/10">
+                            <User className="h-4 w-4 text-primary" />
+                          </div>
+                        )}
+                      </div>
+                    </button>
+
+                    {/* Dropdown Menu */}
+                    <AnimatePresence>
+                      {isUserDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.15 }}
+                          className="absolute right-0 mt-2 w-56 origin-top-right rounded-lg border bg-background p-2 shadow-lg shadow-black/5 ring-1 ring-black/5 dark:ring-white/10"
+                        >
+                          {/* User Info */}
+                          <div className="flex items-center gap-3 p-3">
+                            <div className="relative h-10 w-10 overflow-hidden rounded-full border">
+                              {session.user.image ? (
+                                <Image
+                                  src={session.user.image}
+                                  alt={session.user.name || "User"}
+                                  fill
+                                  className="object-cover"
+                                  sizes="40px"
+                                />
+                              ) : (
+                                <div className="flex h-full w-full items-center justify-center bg-primary/10">
+                                  <User className="h-5 w-5 text-primary" />
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-semibold truncate">
+                                {session.user.name || "User"}
+                              </p>
+                              <p className="text-xs text-muted-foreground truncate">
+                                {session.user.email}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="my-2 h-px bg-border" />
+
+                          {/* Dashboard Link */}
+                          <Link
+                            href="/dashboard"
+                            onClick={() => setIsUserDropdownOpen(false)}
+                            className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+                          >
+                            <LayoutDashboard className="h-4 w-4" />
+                            Dashboard
+                          </Link>
+
+                          <div className="my-2 h-px bg-border" />
+
+                          {/* Logout Button */}
+                          <button
+                            onClick={handleLogout}
+                            className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/50"
+                          >
+                            <LogOut className="h-4 w-4" />
+                            Logout
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  // Original login/signup buttons for non-logged in users
+                  <>
+                    <div className="h-6 w-px bg-border" />
+                    <Button asChild variant="outline" size="sm">
+                      <Link href="/login">Login</Link>
+                    </Button>
+                    <Button asChild size="sm">
+                      <Link href="/sign-up">Sign Up</Link>
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
 
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-2 lg:hidden">
               <ThemeToggle />
+              
+              {session?.user ? (
+                // Mobile user avatar
+                <div className="relative mr-2" ref={dropdownRef}>
+                  <button
+                    onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+                    className="relative h-8 w-8 overflow-hidden rounded-full border-2 border-primary/20"
+                    aria-label="User menu"
+                  >
+                    {session.user.image ? (
+                      <Image
+                        src={session.user.image}
+                        alt={session.user.name || "User"}
+                        fill
+                        className="object-cover"
+                        sizes="32px"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-primary/10">
+                        <User className="h-4 w-4 text-primary" />
+                      </div>
+                    )}
+                  </button>
+
+                  {/* Mobile Dropdown Menu */}
+                  <AnimatePresence>
+                    {isUserDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute right-0 mt-2 w-56 origin-top-right rounded-lg border bg-background p-2 shadow-lg shadow-black/5 ring-1 ring-black/5 dark:ring-white/10"
+                      >
+                        {/* User Info */}
+                        <div className="flex items-center gap-3 p-3">
+                          <div className="relative h-10 w-10 overflow-hidden rounded-full border">
+                            {session.user.image ? (
+                              <Image
+                                src={session.user.image}
+                                alt={session.user.name || "User"}
+                                fill
+                                className="object-cover"
+                                sizes="40px"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center bg-primary/10">
+                                <User className="h-5 w-5 text-primary" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold truncate">
+                              {session.user.name || "User"}
+                            </p>
+                            <p className="text-xs text-muted-foreground truncate">
+                              {session.user.email}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="my-2 h-px bg-border" />
+
+                        {/* Dashboard Link */}
+                        <Link
+                          href="/dashboard"
+                          onClick={() => {
+                            setIsUserDropdownOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                          className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+                        >
+                          <LayoutDashboard className="h-4 w-4" />
+                          Dashboard
+                        </Link>
+
+                        <div className="my-2 h-px bg-border" />
+
+                        {/* Logout Button */}
+                        <button
+                          onClick={handleLogout}
+                          className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/50"
+                        >
+                          <LogOut className="h-4 w-4" />
+                          Logout
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : null}
+
               <Button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 variant="ghost"
@@ -96,8 +307,10 @@ export const Navbar = () => {
             exit={{ opacity: 0, y: 20 }}
             className="lg:hidden"
           >
-            <div className="fixed inset-0 top-16 z-40 bg-background/80 backdrop-blur-sm" 
-                 onClick={() => setIsMenuOpen(false)} />
+            <div 
+              className="fixed inset-0 top-16 z-40 bg-background/80 backdrop-blur-sm" 
+              onClick={() => setIsMenuOpen(false)} 
+            />
             
             <div className="fixed inset-x-0 top-16 z-50 mx-4 overflow-hidden rounded-t-2xl border bg-background shadow-2xl">
               <div className="px-4 pb-4 pt-6">
@@ -128,29 +341,31 @@ export const Navbar = () => {
                   })}
                 </nav>
 
-                {/* Auth Buttons */}
-                <div className="mt-8 grid grid-cols-2 gap-3 px-2">
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="lg"
-                    className="w-full"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <Link href="/login">
-                      <User className="mr-2 h-4 w-4" />
-                      Login
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    className="w-full"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <Link href="/sign-up">Sign Up</Link>
-                  </Button>
-                </div>
+                {/* Auth Buttons - Only show if not logged in */}
+                {!session?.user && (
+                  <div className="mt-8 grid grid-cols-2 gap-3 px-2">
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="lg"
+                      className="w-full"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Link href="/login">
+                        <User className="mr-2 h-4 w-4" />
+                        Login
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      size="lg"
+                      className="w-full"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Link href="/sign-up">Sign Up</Link>
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

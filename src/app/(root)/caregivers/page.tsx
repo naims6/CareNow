@@ -1,7 +1,6 @@
 import CaregiversPage from "@/src/components/Pages/caregivers/CaregiversPage";
-import React from "react";
 
-const page = () => {
+const page = async () => {
   return <CaregiversPage />;
 };
 
