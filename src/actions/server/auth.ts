@@ -61,6 +61,5 @@ export const socialLogin = async (payload: string) => {
 };
 
 export const logoutUser = async () => {
-  console.log("logouting...")
   await signOut({ redirectTo: "/login" });
 };

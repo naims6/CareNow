@@ -23,22 +23,45 @@ export default function SignupPage() {
     formState: { errors },
   } = useForm<SignupFormData>();
 
-  const onSubmit = async (data: SignupFormData) => {
-    setLoading(true);
-    try {
-      const result = await postUser(data);
-      if (result?.success) {
-        toast.success(`Successfully Created Accounnt ${result.message}`);
-        router.push("/");
-      } else {
-        toast.error("User already exist");
-      }
-      setLoading(false);
-    } catch {
-      toast.error("Something went wrong");
-      setLoading(false);
-    }
-  };
+  // method 1 server method
+  // const onSubmit = async (data: SignupFormData) => {
+  //   setLoading(true);
+  //   try {
+  //     const result = await postUser(data);
+  //     if (result?.success) {
+  //       toast.success(`Successfully Created Accounnt ${result.message}`);
+  //       router.push("/");
+  //     } else {
+  //       toast.error("User already exist");
+  //     }
+  //     setLoading(false);
+  //   } catch {
+  //     toast.error("Something went wrong");
+  //     setLoading(false);
+  //   }
+  // };
+
+// method 2 
+const onSubmit = async (data: SignupFormData) => {
+  setLoading(true);
+  try {
+    const response = await fetch(`/api/register`, {
+    method: "POST",
+    headers: {
+      "content-type" : "applicatoin/json"
+    },
+    body: JSON.stringify(data)
+  }
+)
+
+// console.log(response)
+response.status === 201 && toast.success("User has been created") && router.push("/")
+  } catch (error) {
+    toast.error("Something went wrong");
+  } finally {
+    setLoading(false);
+  }
+}
 
   return (
     <section className="flex min-h-screen bg-zinc-50 px-4 py-16 md:py-32 dark:bg-transparent">
