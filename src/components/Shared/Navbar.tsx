@@ -24,7 +24,7 @@ const menuItems = [
 
 export const Navbar = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const pathname = usePathname();
@@ -46,6 +46,47 @@ export const Navbar = () => {
     await logoutUser();
     setIsUserDropdownOpen(false);
   };
+
+  if(status === "loading") {
+    return (
+      <header className="fixed top-0 left-0 z-50 w-full">
+        <nav className="w-full border-b bg-white/95 backdrop-blur-md supports-backdrop-filter:bg-white/60 dark:bg-zinc-950/95 dark:supports-backdrop-filter:bg-zinc-950/60">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex h-16 items-center justify-between">
+              {/* Logo Skeleton */}
+              <div className="flex items-center">
+                <div className="h-8 w-32 bg-muted animate-pulse rounded" />
+              </div>
+
+              {/* Desktop Navigation Skeleton */}
+              <div className="hidden lg:flex lg:items-center lg:space-x-8">
+                <div className="flex space-x-6">
+                  {[1, 2, 3, 4, 5, 6].map((i) => (
+                    <div key={i} className="h-4 w-16 bg-muted animate-pulse rounded" />
+                  ))}
+                </div>
+
+                <div className="ml-6 flex items-center space-x-4">
+                  {/* Theme Toggle Skeleton */}
+                  <div className="h-9 w-9 bg-muted animate-pulse rounded-md" />
+                  <div className="h-6 w-px bg-border" />
+                  {/* Auth Buttons Skeleton */}
+                  <div className="h-9 w-16 bg-muted animate-pulse rounded-md" />
+                  <div className="h-9 w-20 bg-muted animate-pulse rounded-md" />
+                </div>
+              </div>
+
+              {/* Mobile Menu Button Skeleton */}
+              <div className="flex items-center gap-2 lg:hidden">
+                <div className="h-9 w-9 bg-muted animate-pulse rounded-md" />
+                <div className="h-9 w-9 bg-muted animate-pulse rounded-md" />
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    );
+  }
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full">
