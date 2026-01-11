@@ -9,9 +9,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { ThemeToggle } from "../ThemeToggle";
 import { cn } from "@/src/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { logoutUser } from "@/src/actions/server/auth";
 
 const menuItems = [
   { name: "Home", href: "/", icon: Home },
@@ -43,7 +42,8 @@ export const Navbar = () => {
   }, []);
 
   const handleLogout = async () => {
-    await logoutUser();
+    signOut({redirect: false})
+    router.push("/login")
     setIsUserDropdownOpen(false);
   };
 

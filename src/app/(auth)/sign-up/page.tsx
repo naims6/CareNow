@@ -41,7 +41,7 @@ export default function SignupPage() {
   //   }
   // };
 
-// method 2 
+// method with api 2 
 const onSubmit = async (data: SignupFormData) => {
   setLoading(true);
   try {
@@ -52,7 +52,7 @@ const onSubmit = async (data: SignupFormData) => {
     },
     body: JSON.stringify(data)
   }
-)
+  )
 
 // console.log(response)
 response.status === 201 && toast.success("User has been created") && router.push("/")

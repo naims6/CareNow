@@ -4,6 +4,7 @@ import { collections, dbConnect } from "@/src/lib/dbConnect";
 import { SignupFormData } from "@/src/types/auth/SignupFormData";
 import { LoginFormData } from "@/src/types/auth/LoginFormData";
 import { signIn, signOut } from "@/src/auth";
+import { redirect } from "next/dist/server/api-utils";
 
 export const postUser = async (payload: SignupFormData) => {
   const { email, password } = payload;
@@ -61,5 +62,5 @@ export const socialLogin = async (payload: string) => {
 };
 
 export const logoutUser = async () => {
-  await signOut({ redirectTo: "/login" });
+  await signOut({redirect: false});
 };
