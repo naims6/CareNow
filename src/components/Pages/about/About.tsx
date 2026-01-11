@@ -34,7 +34,7 @@ export function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+      <section className="relative py-20 md:py-24 lg:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-background to-secondary/5" />
         <motion.div
           className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -110,10 +110,10 @@ export function AboutPage() {
       </section>
 
       {/* Mission & Values */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="py-16 md:py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12"
+            className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 md:gap-12"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -263,7 +263,7 @@ export function AboutPage() {
       </section>
 
       {/* Services Overview */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-12"
@@ -342,7 +342,7 @@ export function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="py-16 md:py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-12"
@@ -440,7 +440,7 @@ export function AboutPage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div

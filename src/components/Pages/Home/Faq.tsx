@@ -14,9 +14,9 @@ export function FAQ() {
   const rightColumnFaqs = faqs.slice(Math.ceil(faqs.length / 2));
 
   return (
-    <section className="py-16 md:py-28 bg-linear-to-b from-background to-muted/20">
+    <section className="py-16 md:py-20 bg-linear-to-b from-background to-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <Badge
             variant="outline"
             className="mb-4 px-4 py-2 border-primary/20 bg-primary/5 hover:bg-primary/5 text-sm font-medium"

@@ -43,9 +43,9 @@ export function CaregiverPreview() {
   ]
 
   return (
-    <section className="py-16 md:py-24 bg-linear-to-b from-background to-muted/20">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-12">
+    <section className="py-16 md:py-20 bg-linear-to-b from-background to-muted/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Meet Our Verified Caregivers
           </h2>
@@ -54,7 +54,7 @@ export function CaregiverPreview() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12">
           {caregivers.map((caregiver, index) => (
             <motion.div
               key={index}
