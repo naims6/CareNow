@@ -3,7 +3,7 @@ import { Logo as LogoIcon } from "@/src/components/logo";
 import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
-import {  Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -30,12 +30,10 @@ export default function LoginPage() {
       callbackUrl: "/",
     });
 
-    if (!result) return { error: "error occured" };
-
-    if (result.error === "CredentialsSignin") {
+    console.log("Login result", result);
+    if (!!result.error) {
       toast.error("Password or Email is wrong");
-    }
-    if (result.ok) {
+    } else {
       router.push("/");
       toast.success("Login succesful");
     }

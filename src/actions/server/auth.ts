@@ -1,11 +1,12 @@
 "use server";
-import bcrypt from "bcryptjs";
-import { collections, dbConnect } from "@/src/lib/dbConnect";
 import { SignupFormData } from "@/src/types/auth/SignupFormData";
-import { LoginFormData } from "@/src/types/auth/LoginFormData";
+import bcrypt from "bcryptjs";
 import { signIn, signOut } from "@/src/auth";
-import { redirect } from "next/dist/server/api-utils";
+import { User } from "@/src/model/user-model";
+import { collections, dbConnect } from "@/src/lib/dbConnect";
+import { LoginFormData } from "@/src/types/auth/LoginFormData";
 
+// method 1
 export const postUser = async (payload: SignupFormData) => {
   const { email, password } = payload;
   // check user exist or not
@@ -25,14 +26,13 @@ export const postUser = async (payload: SignupFormData) => {
     role: "user",
     password: hashPassword,
   };
-  console.log(newUser);
 
   // 3. send user to the database
   const result = await dbConnect("users").insertOne(newUser);
   if (result.acknowledged) {
     return {
       success: true,
-      message: `user created with ${result.insertedId}`,
+      message: `user created successfully`,
     };
   }
 };
@@ -40,20 +40,33 @@ export const postUser = async (payload: SignupFormData) => {
 export const loginUser = async (payload: LoginFormData) => {
   const { email, password } = payload;
 
-  if (!email || !password) {
-    return { error: "Missing email or password" };
+  const user = await dbConnect(collections.USERS).findOne({ email });
+
+  if (!user) {
+    return null;
   }
 
-  const user = await dbConnect(collections.USERS).findOne({ email });
-  if (!user) {
-    return { error: "User is not exist" };
-  }
   const isMatched = await bcrypt.compare(password, user.password);
 
   if (isMatched) {
-    return user;
+    return {
+      id: user._id.toString(),
+      email: user.email,
+      name: user.fullname,
+      image: user.image,
+      role: user.role,
+      createdAt: user.createdAt,
+    };
   } else {
-    return { error: "Wrong credential" };
+    return null;
+  }
+};
+
+export const createUser = async (userData: SignupFormData) => {
+  try {
+    await User.create(userData);
+  } catch (error) {
+    throw new Error("Failed to create user");
   }
 };
 
@@ -62,5 +75,5 @@ export const socialLogin = async (payload: string) => {
 };
 
 export const logoutUser = async () => {
-  await signOut({redirect: false});
+  await signOut({ redirect: false });
 };

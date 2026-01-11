@@ -3,15 +3,16 @@ import { Logo as LogoIcon } from "@/src/components/logo";
 import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
-import { Github, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { postUser } from "@/src/actions/server/auth";
+// import { postUser } from "@/src/actions/server/auth";
 import { SignupFormData } from "@/src/types/auth/SignupFormData";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import SocialLogin from "@/src/components/auth/SocialLogin";
+import { postUser } from "@/src/actions/server/auth";
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,44 +25,43 @@ export default function SignupPage() {
   } = useForm<SignupFormData>();
 
   // method 1 server method
+  const onSubmit = async (data: SignupFormData) => {
+    setLoading(true);
+    try {
+      const result = await postUser(data);
+      if (result?.success) {
+        toast.success(`Successfully Created Accounnt`);
+        router.push("/");
+      } else {
+        toast.error("User already exist");
+      }
+      setLoading(false);
+    } catch {
+      toast.error("Something went wrong");
+      setLoading(false);
+    }
+  };
+
+  // method with api 2
   // const onSubmit = async (data: SignupFormData) => {
   //   setLoading(true);
   //   try {
-  //     const result = await postUser(data);
-  //     if (result?.success) {
-  //       toast.success(`Successfully Created Accounnt ${result.message}`);
+  //     const response = await fetch(`/api/register`, {
+  //       method: "POST",
+  //       headers: {
+  //         "content-type": "applicatoin/json",
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
+  //     response.status === 201 &&
+  //       toast.success("User has been created") &&
   //       router.push("/");
-  //     } else {
-  //       toast.error("User already exist");
-  //     }
-  //     setLoading(false);
-  //   } catch {
+  //   } catch (error) {
   //     toast.error("Something went wrong");
+  //   } finally {
   //     setLoading(false);
   //   }
   // };
-
-// method with api 2 
-const onSubmit = async (data: SignupFormData) => {
-  setLoading(true);
-  try {
-    const response = await fetch(`/api/register`, {
-    method: "POST",
-    headers: {
-      "content-type" : "applicatoin/json"
-    },
-    body: JSON.stringify(data)
-  }
-  )
-
-// console.log(response)
-response.status === 201 && toast.success("User has been created") && router.push("/")
-  } catch (error) {
-    toast.error("Something went wrong");
-  } finally {
-    setLoading(false);
-  }
-}
 
   return (
     <section className="flex min-h-screen bg-zinc-50 px-4 py-16 md:py-32 dark:bg-transparent">

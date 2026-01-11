@@ -1,3 +1,4 @@
+"use client"
 import { Logo } from '@/src/components/logo'
 import Link from 'next/link'
 
