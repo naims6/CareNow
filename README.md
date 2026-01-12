@@ -18,7 +18,7 @@ CareNow is a comprehensive, full-stack caregiving platform designed to connect f
   - **Dark Mode Support**: Seamless theme switching with `next-themes`.
   - **Micro-animations**: Enhanced user experience using Framer Motion.
   - **Loading Skeletons**: Perceived performance improvements with tailored skeleton states.
-- **SEO Optimized**: Robust metadata implementation, OpenGraph support, and canonical URLs for better search engine visibility.
+- **SEO Optimized**: Fully Seo optimized with metadata, OpenGraph support, and canonical URLs.
 - **Server-Side Excellence**: Leverages Next.js Server Actions for efficient data mutations and retrieval.
 
 ## 🛠️ Tech Stack
