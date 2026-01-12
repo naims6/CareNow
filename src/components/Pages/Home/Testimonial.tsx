@@ -37,7 +37,7 @@ export default function Testimonial() {
   return (
     <section>
       <div className="py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <Badge variant="outline" className="mb-4">
               Customer Stories
@@ -53,10 +53,10 @@ export default function Testimonial() {
           <div
             className={`${
               iseExpandedTestimonial ? "" : "max-h-162.5"
-            } mt-8 grid gap-3 sm:grid-cols-2 md:mt-12 lg:grid-cols-3  overflow-hidden relative transition-all duration-200`}
+            } mt-8 md:mt-12 grid gap-4 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 overflow-hidden relative transition-all duration-200`}
           >
             {testimonialChunks.map((chunk, chunkIndex) => (
-              <div key={chunkIndex} className="space-y-3">
+              <div key={chunkIndex} className="space-y-4 md:space-y-6">
                 {chunk.map(({ name, role, quote, image }, index) => (
                   <Card key={index}>
                     <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">

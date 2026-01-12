@@ -8,6 +8,7 @@ import { CheckCircle } from "lucide-react";
 import { stats } from "@/src/data/stats";
 import { TrustIndicators } from "./TrustIndicators";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export function About() {
   const features = [
@@ -21,14 +22,14 @@ export function About() {
 
   return (
     <section id="about" className="py-16 md:py-20 border-b border-accent">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Main Content with Stagger Animation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="grid lg:grid-cols-2 gap-12 items-center"
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
         >
           {/* Left Column */}
           <div>
@@ -107,13 +108,19 @@ export function About() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="flex flex-wrap gap-4"
             >
+              <Link href="/caregivers">
+              
               <Button>Book a Caregiver</Button>
-              <Button variant="outline">Learn More</Button>
+              </Link>
+              <Link href="/about">
+              
+              <Button variant="outline">Read More</Button>
+              </Link>
             </motion.div>
           </div>
 
           {/* Right Column - Stats */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-4 md:gap-6">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}

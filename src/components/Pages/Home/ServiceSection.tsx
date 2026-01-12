@@ -10,14 +10,14 @@ import { TrustCard } from "../../card/TrustCard";
 export function ServicesSection() {
   return (
     <section className="py-16 md:py-20 border-b border-accent">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Service Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-12"
+          className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
         >
           <Badge variant="outline" className="mb-4">
             Our Services
@@ -34,7 +34,7 @@ export function ServicesSection() {
 
         {/* Services Grid */}
         <motion.div
-          className="grid md:grid-cols-3 gap-6"
+          className="grid md:grid-cols-3 gap-6 lg:gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -60,7 +60,7 @@ export function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 grid md:grid-cols-3 gap-6"
+          className="mt-12 md:mt-16 grid md:grid-cols-3 gap-6 lg:gap-8"
         >
           <TrustCard
             icon={Shield}

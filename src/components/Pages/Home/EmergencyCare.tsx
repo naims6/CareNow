@@ -8,9 +8,9 @@ import { Badge } from "../../ui/badge";
 
 export function EmergencyCare() {
   return (
-    <section className="mt-10 py-16 md:py-24 bg-linear-to-r from-red-50/50 to-orange-50/50 dark:from-red-950/15 dark:to-orange-950/15">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="mt-10 py-16 md:py-20 bg-linear-to-r from-red-50/50 to-orange-50/50 dark:from-red-950/15 dark:to-orange-950/15">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
