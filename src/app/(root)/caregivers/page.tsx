@@ -11,9 +11,9 @@ interface ISearchParams {
 const Caregivers = async ({
   searchParams,
 }: {
-  searchParams: ISearchParams;
+  searchParams: Promise<ISearchParams>;
 }) => {
-  const resolvedParams = await searchParams
+  const resolvedParams = await searchParams;
   return (
     <>
       {/* Hero Section */}

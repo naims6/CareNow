@@ -4,16 +4,16 @@ import { collections, dbConnect } from "@/src/lib/dbConnect";
 
 interface ICaregivers {
   search?: string;
-  specialty?: string;
   page?: number;
   limit?: number;
+  sort?: string;
 }
 
 export const getCaregiversData = async ({
   search = "",
-  specialty = "",
   page = 1,
   limit = 6,
+  sort = "",
 }: ICaregivers) => {
   try {
     const skip = (page - 1) * limit;
@@ -25,16 +25,23 @@ export const getCaregiversData = async ({
           name: { $regex: search, $options: "i" },
         },
         {
-          specialty: { $regex: search, $options: "i" },
+          location: { $regex: search, $options: "i" },
         },
       ];
     }
-    if (specialty) {
-      query.specialty = { $regex: specialty, $options: "i" };
+
+    const sortQuery: any = {};
+    if (sort === "rating-desc") {
+      sortQuery.rating = -1;
+    } else if (sort === "rate-asc") {
+      sortQuery.hourlyRate = 1;
+    } else if (sort === "rate-desc") {
+      sortQuery.hourlyRate = -1;
     }
 
     const caregivers = await dbConnect(collections.CAREGIVERS)
       .find(query)
+      .sort(sortQuery)
       .skip(skip)
       .limit(limit)
       .toArray();

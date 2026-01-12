@@ -5,7 +5,7 @@ import { parseJSON } from "@/src/lib/utils";
 interface ISearchParams {
   search?: string;
   page?: string;
-  specialty?: string;
+  sort?: string;
 }
 
 export default async function CaregiversContent({
@@ -20,7 +20,7 @@ export default async function CaregiversContent({
   } = await getCaregiversData({
     search: searchParams.search || "",
     page: Number(searchParams.page) || 1,
-    specialty: searchParams.specialty || "",
+    sort: searchParams.sort || "",
     limit: 6,
   });
 
