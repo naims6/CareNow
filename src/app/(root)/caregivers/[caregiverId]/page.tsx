@@ -1,4 +1,4 @@
-import { getCaregiverById, getCaregiversData } from "@/src/actions/server/caregivers";
+import { getCaregiverById } from "@/src/actions/server/caregivers";
 import { CaregiverDetails } from "@/src/components/Pages/caregivers/CaregiverDetails";
 import { parseJSON } from "@/src/lib/utils";
 

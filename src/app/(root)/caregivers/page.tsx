@@ -2,7 +2,18 @@ import { Suspense } from "react";
 import CaregiversContent from "./CaregiversContent";
 import CaregiverSkeleton from "./loading";
 
-const Caregivers = async () => {
+interface ISearchParams {
+  search?: string;
+  page?: string;
+  specialty?: string;
+}
+
+const Caregivers = async ({
+  searchParams,
+}: {
+  searchParams: ISearchParams;
+}) => {
+  const resolvedParams = await searchParams
   return (
     <>
       {/* Hero Section */}
@@ -20,7 +31,7 @@ const Caregivers = async () => {
         </div>
       </section>
       <Suspense fallback={<CaregiverSkeleton />}>
-        <CaregiversContent />
+        <CaregiversContent searchParams={resolvedParams} />
       </Suspense>
     </>
   );
