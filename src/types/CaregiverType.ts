@@ -8,7 +8,7 @@ export interface TCaregiver {
   image: string;
   specialties: string[];
   hourlyRate: number;
-  availability: string; 
+  availability: string;
   location: string;
   languages: string[];
   verified: boolean;
