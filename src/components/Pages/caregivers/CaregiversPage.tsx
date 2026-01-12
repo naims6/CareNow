@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import { Input } from "@/src/components/ui/input";
 import {
   Pagination,
@@ -34,12 +36,32 @@ export function CaregiversPage({
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const [searchTerm, setSearchTerm] = useState(
+    searchParams.get("search") || ""
+  );
+
   const updateQuery = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set(key, value);
-    // params.set("page", "1");
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+    if (key === "search") {
+      params.set("page", "1");
+    }
     router.push(`?${params.toString()}`);
   };
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchTerm !== (searchParams.get("search") || "")) {
+        updateQuery("search", searchTerm);
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 mt-16">
@@ -53,8 +75,8 @@ export function CaregiversPage({
               <Input
                 placeholder="Search by name or location..."
                 className="pl-12 h-12 text-lg shadow-sm"
-                defaultValue={searchParams.get("search") || ""}
-                onChange={(e) => updateQuery("search", e.target.value)}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
 
