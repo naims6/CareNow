@@ -15,9 +15,14 @@ export const getCaregiversData = async () => {
 
 export const getCaregiverById = async (id: string) => {
   try {
-    const caregiverData = await dbConnect(collections.CAREGIVERS).findOne({
-      id: id,
-    });
+    // Add minimum delay for better loading skeleton UX
+    const [caregiverData] = await Promise.all([
+      dbConnect(collections.CAREGIVERS).findOne({
+        id: id,
+      }),
+      new Promise((resolve) => setTimeout(resolve, 200)),
+    ]);
+    
     return caregiverData;
   } catch (error) {
     console.log(error);
