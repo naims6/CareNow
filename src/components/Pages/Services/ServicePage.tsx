@@ -193,7 +193,7 @@ const ServicePage = () => {
                           >
                             <Button className="w-full" size="lg" asChild>
                               <Link href={`/services/${service.id}`}>
-                                Book {service.title}
+                                View Details
                                 <ArrowRight className="ml-2 h-4 w-4" />
                               </Link>
                             </Button>

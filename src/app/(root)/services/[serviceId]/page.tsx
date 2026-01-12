@@ -226,7 +226,7 @@ export default async function ServiceDetailPage({
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" asChild>
-                    <Link href={`/book?service=${service.id}`}>
+                    <Link href={`/services/payment/${service.id}`}>
                       Book {service.title}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
