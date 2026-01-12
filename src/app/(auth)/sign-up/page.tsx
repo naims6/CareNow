@@ -31,7 +31,7 @@ export default function SignupPage() {
       const result = await postUser(data);
       if (result?.success) {
         toast.success(`Successfully Created Accounnt`);
-        router.push("/");
+        router.push("/login");
       } else {
         toast.error("User already exist");
       }

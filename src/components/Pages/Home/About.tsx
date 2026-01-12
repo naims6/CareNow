@@ -8,6 +8,7 @@ import { CheckCircle } from "lucide-react";
 import { stats } from "@/src/data/stats";
 import { TrustIndicators } from "./TrustIndicators";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export function About() {
   const features = [
@@ -107,8 +108,14 @@ export function About() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="flex flex-wrap gap-4"
             >
+              <Link href="/caregivers">
+              
               <Button>Book a Caregiver</Button>
-              <Button variant="outline">Learn More</Button>
+              </Link>
+              <Link href="/about">
+              
+              <Button variant="outline">Read More</Button>
+              </Link>
             </motion.div>
           </div>
 
