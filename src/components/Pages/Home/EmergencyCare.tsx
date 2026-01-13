@@ -30,15 +30,15 @@ export function EmergencyCare() {
 
             <div className="space-y-4 mb-8">
               <div className="flex items-center gap-3">
-                <Clock className="h-5 w-5 text-red-600" />
+                <Clock className="h-5 w-5 text-red-400" />
                 <span>60-Minute Response Time</span>
               </div>
               <div className="flex items-center gap-3">
-                <Shield className="h-5 w-5 text-red-600" />
+                <Shield className="h-5 w-5 text-red-400" />
                 <span>Trained Emergency Responders</span>
               </div>
               <div className="flex items-center gap-3">
-                <Ambulance className="h-5 w-5 text-red-600" />
+                <Ambulance className="h-5 w-5 text-red-400" />
                 <span>Hospital Coordination Available</span>
               </div>
             </div>
@@ -74,7 +74,7 @@ export function EmergencyCare() {
                   </p>
                   <div className="space-y-3">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-destructive">
+                      <div className="text-3xl font-bold text-red-500">
                         60 min
                       </div>
                       <div className="text-sm text-muted-foreground">

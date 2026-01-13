@@ -26,7 +26,7 @@ import ServiceCardGrid from "@/src/components/Pages/Services/ServiceCardGrid";
 const ServicePage = () => {
   return (
     <>
-     {/* Services Tabs */}
+      {/* Services Tabs */}
       <section id="services" className="py-16 md:pt-10 pb-16">
         <div className="mx-auto max-w-7xl px-6">
           <Tabs defaultValue="baby-care" className="w-full">
@@ -84,9 +84,18 @@ const ServicePage = () => {
                           whileInView={{ scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.4 }}
-                          className={`p-4 rounded-xl ${service.color
-                            .replace("bg-", "bg-linear-to-br from-")
-                            .replace("/20", "/40")} shadow-lg`}
+                          className={`p-4 rounded-2xl bg-gradient-to-br ${service.iconColor.replace(
+                            "text-",
+                            "from-"
+                          )} ${service.iconColor
+                            .replace("600", "500")
+                            .replace(
+                              "text-",
+                              "to-"
+                            )} shadow-xl shadow-${service.iconColor.replace(
+                            "text-",
+                            ""
+                          )}/30 ring-1 ring-white/20`}
                         >
                           <Icon className="h-8 w-8 text-white" />
                         </motion.div>
@@ -300,7 +309,7 @@ const ServicePage = () => {
         </div>
       </motion.section>
     </>
-  )
-}
+  );
+};
 
-export default ServicePage
+export default ServicePage;
