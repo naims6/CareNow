@@ -96,7 +96,7 @@ export default function Testimonial() {
               } absolute bottom-0 left-0 h-37.5 w-full flex items-center justify-center bg-linear-to-t from-background to-transparent`}
             >
               <Button
-                variant="destructive"
+                variant="default"
                 className="cursor-pointer"
                 onClick={handleLoadReview}
               >

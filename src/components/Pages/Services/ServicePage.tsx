@@ -40,21 +40,21 @@ const ServicePage = () => {
               <TabsList className="grid w-full max-w-2xl grid-cols-3">
                 <TabsTrigger
                   value="baby-care"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 cursor-pointer"
                 >
                   <Baby className="h-4 w-4" />
                   Baby Care
                 </TabsTrigger>
                 <TabsTrigger
                   value="elderly-care"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 cursor-pointer"
                 >
                   <User className="h-4 w-4" />
                   Elderly Care
                 </TabsTrigger>
                 <TabsTrigger
                   value="special-care"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 cursor-pointer"
                 >
                   <HeartPulse className="h-4 w-4" />
                   Special Care
