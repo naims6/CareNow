@@ -65,7 +65,7 @@ export const loginUser = async (payload: LoginFormData) => {
 export const createUser = async (userData: SignupFormData) => {
   try {
     await User.create(userData);
-  } catch (error) {
+  } catch  {
     throw new Error("Failed to create user");
   }
 };
