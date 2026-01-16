@@ -17,7 +17,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log("credentials", credentials);
         const { email, password } = credentials;
 
         const user = await loginUser({ email, password } as LoginFormData);
@@ -29,6 +28,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
 
+    // Outh Implementation
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,

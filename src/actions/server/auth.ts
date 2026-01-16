@@ -6,6 +6,8 @@ import { User } from "@/src/model/user-model";
 import { collections, dbConnect } from "@/src/lib/dbConnect";
 import { LoginFormData } from "@/src/types/auth/LoginFormData";
 
+
+
 // method 1
 export const postUser = async (payload: SignupFormData) => {
   const { email, password } = payload;
@@ -40,7 +42,7 @@ export const postUser = async (payload: SignupFormData) => {
 export const loginUser = async (payload: LoginFormData) => {
   const { email, password } = payload;
 
-  const user = await dbConnect(collections.USERS).findOne({ email });
+  const user = await dbConnect(collections.USERS).findOne({ email: email.toLowerCase() });
 
   if (!user) {
     return null;

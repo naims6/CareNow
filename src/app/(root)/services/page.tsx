@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import ServiceHeroSection from "@/src/components/Pages/Services/ServiceHeroSection";
 import { FAQ } from "@/src/components/Pages/Home/Faq";
 import ServicePage from "@/src/components/Pages/Services/ServicePage";
+import { pageMetadata, siteMetadata } from "@/src/config/metadata";
 
 export const metadata: Metadata = {
-  title: "Our Care Services | Baby Care, Elderly Care & Special Care",
-  description:
-    "Explore our professional care services: baby sitting, elderly care, and special needs care. Certified caregivers, flexible scheduling, and 24/7 support.",
+  title: `${pageMetadata.services.title} ${siteMetadata.titleSuffix}`,
+  description: `${pageMetadata.services.description}`,
 };
 
 export default function ServicesPage() {

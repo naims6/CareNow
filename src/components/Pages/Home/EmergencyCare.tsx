@@ -44,7 +44,7 @@ export function EmergencyCare() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant={"default"} className="gap-2">
+              <Button className="gap-2">
                 <Phone className="h-4 w-4" />
                 Call Emergency: 09678-CARE-NOW
               </Button>
