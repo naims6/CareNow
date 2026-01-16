@@ -19,7 +19,7 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginFormData>();
 
   const onSubmit = async (data: LoginFormData) => {
@@ -30,7 +30,6 @@ export default function LoginPage() {
       callbackUrl: "/",
     });
 
-    console.log("Login result", result);
     if (!!result.error) {
       toast.error("Password or Email is wrong");
     } else {
@@ -100,6 +99,10 @@ export default function LoginPage() {
                   placeholder="Enter your password"
                   {...register("password", {
                     required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must should be 6 character",
+                    },
                   })}
                   id="password"
                   className={`pr-10 ${errors.password ? "border-red-500" : ""}`}
@@ -120,7 +123,7 @@ export default function LoginPage() {
             </div>
 
             <Button type="submit" className="w-full">
-              Login
+              {isSubmitting ? "Loading..." : "Login"}
             </Button>
           </div>
         </div>

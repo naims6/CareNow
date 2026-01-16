@@ -17,16 +17,14 @@ import { postUser } from "@/src/actions/server/auth";
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<SignupFormData>();
 
   // method 1 server method
   const onSubmit = async (data: SignupFormData) => {
-    setLoading(true);
     try {
       const result = await postUser(data);
       if (result?.success) {
@@ -35,10 +33,8 @@ export default function SignupPage() {
       } else {
         toast.error("User already exist");
       }
-      setLoading(false);
     } catch {
       toast.error("Something went wrong");
-      setLoading(false);
     }
   };
 
@@ -190,7 +186,7 @@ export default function SignupPage() {
               )}
             </div>
             <Button type="submit" className="w-full">
-              {loading ? "Loading..." : "Sign Up"}
+              {isSubmitting ? "Loading..." : "Sign Up"}
             </Button>
           </div>
         </div>
