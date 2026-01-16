@@ -1,6 +1,13 @@
 import { Suspense } from "react";
 import CaregiversContent from "./CaregiversContent";
 import CaregiverSkeleton from "./loading";
+import { pageMetadata, siteMetadata } from "@/src/config/metadata";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `${pageMetadata.caregivers.title} ${siteMetadata.titleSuffix}`,
+  description: `${pageMetadata.caregivers.description}`,
+};
 
 interface ISearchParams {
   search?: string;
