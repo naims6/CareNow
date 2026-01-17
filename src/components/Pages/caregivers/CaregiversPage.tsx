@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { Input } from "@/src/components/ui/input";
 import {
@@ -23,6 +23,8 @@ import { Search, Users, ChevronLeft, ChevronRight } from "lucide-react";
 import CaregiverCard from "../../card/CaregiverCard";
 import { TCaregiver } from "@/src/types/CaregiverType";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
+import CaregiversGridSkeleton from "./CaregiversGridSkeleton";
 
 export function CaregiversPage({
   caregiversData,
@@ -35,36 +37,42 @@ export function CaregiversPage({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
 
+  console.log(searchParams.toString(), "rendering");
   const [searchTerm, setSearchTerm] = useState(
     searchParams.get("search") || ""
   );
 
-  const updateQuery = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (value) {
-      params.set(key, value);
-    } else {
-      params.delete(key);
-    }
-    if (key === "search") {
-      params.set("page", "1");
-    }
-    router.push(`?${params.toString()}`);
-  };
+  const updateQuery = useCallback(
+    (key: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (value) {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
+      if (key === "search") {
+        params.set("page", "1");
+      }
+      startTransition(() => {
+        router.push(`?${params.toString()}`);
+      });
+    },
+    [router, searchParams]
+  );
 
   useEffect(() => {
+    if (searchTerm === (searchParams.get("search") || "")) return;
     const delayDebounceFn = setTimeout(() => {
-      if (searchTerm !== (searchParams.get("search") || "")) {
-        updateQuery("search", searchTerm);
-      }
+      updateQuery("search", searchTerm);
     }, 300);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm]);
+  }, [searchTerm, updateQuery, searchParams]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 mt-16">
+    <div className="min-h-screen bg-linear-to-b from-background to-muted/20 mt-16">
       {/* Search & Filters */}
       <section className="py-8 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -90,7 +98,7 @@ export function CaregiversPage({
                   defaultValue={searchParams.get("sort") || "default"}
                   onValueChange={(value) => updateQuery("sort", value)}
                 >
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-45">
                     <SelectValue placeholder="Most Recent" />
                   </SelectTrigger>
                   <SelectContent>
@@ -113,7 +121,9 @@ export function CaregiversPage({
       {/* Caregivers Grid */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {caregiversData.length === 0 ? (
+          {isPending ? (
+            <CaregiversGridSkeleton />
+          ) : caregiversData.length === 0 ? (
             <div className="text-center py-16">
               <Users className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">
@@ -130,7 +140,7 @@ export function CaregiversPage({
               </div>
 
               <div className="mt-12 pt-8 border-t">
-                <div className="hidden sm:flex flex items-center justify-center">
+                <div className="hidden sm:flex items-center justify-center">
                   {/* Pagination Controls */}
                   <Pagination>
                     <PaginationContent>

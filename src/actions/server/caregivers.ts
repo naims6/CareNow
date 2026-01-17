@@ -1,12 +1,18 @@
 "use server";
 
 import { collections, dbConnect } from "@/src/lib/dbConnect";
+import { Filter, Sort } from "mongodb";
 
 interface ICaregivers {
   search?: string;
   page?: number;
   limit?: number;
   sort?: string;
+}
+
+interface ICaregiversDocument {
+  name?: string;
+  location?: string;
 }
 
 export const getCaregiversData = async ({
@@ -17,7 +23,7 @@ export const getCaregiversData = async ({
 }: ICaregivers) => {
   try {
     const skip = (page - 1) * limit;
-    const query: any = {};
+    const query: Filter<ICaregiversDocument> = {};
 
     if (search) {
       query.$or = [
@@ -30,13 +36,13 @@ export const getCaregiversData = async ({
       ];
     }
 
-    const sortQuery: any = {};
+    let sortQuery: Sort = {};
     if (sort === "rating-desc") {
-      sortQuery.rating = -1;
+      sortQuery = { rating: -1 };
     } else if (sort === "rate-asc") {
-      sortQuery.hourlyRate = 1;
+      sortQuery = { hourlyRate: 1 };
     } else if (sort === "rate-desc") {
-      sortQuery.hourlyRate = -1;
+      sortQuery = { hourlyRate: -1 };
     }
 
     const caregivers = await dbConnect(collections.CAREGIVERS)
