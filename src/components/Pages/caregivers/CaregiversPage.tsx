@@ -23,6 +23,8 @@ import { Search, Users, ChevronLeft, ChevronRight } from "lucide-react";
 import CaregiverCard from "../../card/CaregiverCard";
 import { TCaregiver } from "@/src/types/CaregiverType";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
+import CaregiversGridSkeleton from "./CaregiversGridSkeleton";
 
 export function CaregiversPage({
   caregiversData,
@@ -35,10 +37,11 @@ export function CaregiversPage({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
 
   console.log(searchParams.toString(), "rendering");
   const [searchTerm, setSearchTerm] = useState(
-    searchParams.get("search") || "",
+    searchParams.get("search") || ""
   );
 
   const updateQuery = useCallback(
@@ -52,9 +55,11 @@ export function CaregiversPage({
       if (key === "search") {
         params.set("page", "1");
       }
-      router.push(`?${params.toString()}`);
+      startTransition(() => {
+        router.push(`?${params.toString()}`);
+      });
     },
-    [router, searchParams],
+    [router, searchParams]
   );
 
   useEffect(() => {
@@ -116,7 +121,9 @@ export function CaregiversPage({
       {/* Caregivers Grid */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {caregiversData.length === 0 ? (
+          {isPending ? (
+            <CaregiversGridSkeleton />
+          ) : caregiversData.length === 0 ? (
             <div className="text-center py-16">
               <Users className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">
@@ -168,7 +175,7 @@ export function CaregiversPage({
                               {p}
                             </PaginationLink>
                           </PaginationItem>
-                        ),
+                        )
                       )}
 
                       {/* Next Button */}
