@@ -37,7 +37,7 @@ CareNow is a comprehensive, full-stack caregiving platform designed to connect f
 
 ### Prerequisites
 
-- Node.js 18.x or later
+- Node.js 19.x or later
 - MongoDB Atlas account or local MongoDB instance
 
 ### Installation
